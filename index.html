@@ -16,6 +16,7 @@
 
 
 <script>
+    //nossa array 
     let pets = [
         { nome: "Rex", idade: 5, tipo: "Cachorro", idadeHumana: function() { return this.idade * 7; }, interação: function() { return "au au"; } },
         { nome: "Mimi", idade: 3, tipo: "Gato", idadeHumana: function() { return this.idade * 6; }, interação: function() { return "miau"; } },
@@ -23,8 +24,9 @@
         { nome: "Pingo", idade: 2, tipo: "Coelho", idadeHumana: function() { return this.idade * 5; }, interação: function() { return "grr grr"; } }
     ];
 
-    //função para listar os pets no console apenas com nome e tipo
-    //a função recebe uma lista de pets e imprime o nome e tipo de cada pet
+    //essa é uma função auxiliar criada para exibir uma lista simplificada dos pets
+    //isso ajuda a reutilizar código e a confirmar o estado da lista após uma remoção.
+    //a função recebe um params ListaDePets que usa o foreach para percorrer a lista recebida (pets)
     const listarPets = (listaDePets) => {
         console.log("\nLista de pets");
         listaDePets.forEach(pet => {
@@ -41,12 +43,12 @@
     //função para remover um pet pelo nome
     //a função recebe o nome do pet a ser removido
     const removerPetPorNome = (nome) => {
-        const tamanhoOriginal = pets.length; 
+        const tamanhoOriginal = pets.length; //armazena o número de pets na lista antes de qualquer remoção, para ajudar lá na verificação se o pet foi removido ou não.
         
         
-        pets = pets.filter(pet => pet.nome.toLowerCase() !== nome.toLowerCase());
+        pets = pets.filter(pet => pet.nome.toLowerCase() !== nome.toLowerCase()); //o filter cria um novo array com apenas elementos que passam no teste. ele compara o nome do pet no array com o nome fornecido para a função.
 
-        if (pets.length < tamanhoOriginal) {
+        if (pets.length < tamanhoOriginal) { //ele compara o novo tamanho da lista com o tamanho original, se for menor a remoção deu certo, se não, nenhum pet foi removido.
             console.log(`\nPet "${nome}" removido com sucesso.`);
             listarPets(pets);
         } else {
